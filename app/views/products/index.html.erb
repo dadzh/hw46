@@ -1,0 +1,66 @@
+<div class="jumbotron">
+  <h1><%= t '.welcome' %></h1>
+  <p><%= t '.welcome_description' %></p>
+  <p><a href="#" class="btn btn-primary btn-lg"><%= t '.learn_more' %></a></p>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-3">
+    <div class="panel panel-default" id="cart">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= t '.categories' %></h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% Category.all.each do |category| %>
+            <li><%= link_to category.name_locale, category_path(category) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12 products-pagination">
+        <%= will_paginate @products %>
+      </div>
+    </div>
+
+    <div class="row">
+        <% @products.each do |product| %>
+
+        <div class="col-sm-6 product-item">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3><%= product.send(Product.title_locale) %></h3>
+              <div> <%= image_tag product.image.thumb.url %> </div>
+              <h4>$<%= product.price %></h4>
+              <p>
+                <%= link_to t('.show_product'), product_path(product) %>
+                <%= link_to t('.add_to_cart') %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <%= will_paginate @products %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+      <div class="panel panel-default" id="cart">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= t '.cart' %></h3>
+        </div>
+        <div class="panel-body">
+          <%= t '.cart_is_empty' %>
+        </div>
+      </div>
+  </div>
+</div>

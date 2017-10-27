@@ -1,0 +1,14 @@
+<h1><%= @product.send(Product.title_locale) %></h1>
+<p><%= @product.send(Product.description_locale) %></p>
+<p>
+    <%= Product.human_attribute_name(:price) %>: <b><%= @product.price %></b>
+</p>
+<p>
+    <%= Product.human_attribute_name(:category) %>: <b><%= @product.category.send(Category.name_locale) %></b>
+</p>
+<p>
+  <%= image_tag @product.image.thumb.url %>
+</p>
+<div>
+    <%= link_to t('.back_to_list'), root_path %>
+</div>
